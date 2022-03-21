@@ -1,27 +1,28 @@
 class Solution {
 public:
     string findReplaceString(string s, vector<int>& indices, vector<string>& sources, vector<string>& targets) {
-        vector<pair<int,pair<string,string>>> vec;
-        for(int i = 0 ; i<indices.size() ; i++){
-            vec.push_back({indices[i],{sources[i],targets[i]}});
-        }
-        sort(vec.begin(),vec.end());
+        
         unordered_map<int,int> mp;
-        for(int i = 0 ; i<vec.size() ; i++){
-            if(s.substr(vec[i].first,vec[i].second.first.size())==vec[i].second.first){
-                mp[vec[i].first] = i;
-            }
+        for(int i = 0  ; i<indices.size() ; i++){
+            mp[indices[i]] = i;
         }
+        int idx = 0;
         string sol = "";
         for(int i = 0 ; i<s.size() ;){
             if(mp.find(i)!=mp.end()){
-                sol+=vec[mp[i]].second.second;
-                i+=vec[mp[i]].second.first.size();
-            }else{
-                sol+=s[i];
-                i++;
+                int idx = mp[i];
+                if(sources[idx].size()+i<=s.size()){
+                    string str = s.substr(i,sources[idx].size());
+                    if(str==sources[idx]){
+                        sol+=targets[idx];
+                        i+=sources[idx].size();
+                        continue;
+                    }
+                }
             }
-        }
+            sol+=s[i];
+            i++;
+        }   
         return sol;
     }
 };
