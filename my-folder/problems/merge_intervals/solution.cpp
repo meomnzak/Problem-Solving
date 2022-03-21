@@ -1,31 +1,22 @@
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {
-        priority_queue<pair<int,int>,vector<pair<int,int>>,greater<pair<int,int>>> q;
-        for(int i = 0 ; i<intervals.size() ; i++){
-            q.push({intervals[i][0],intervals[i][1]});
-        }
-        vector<vector<int>> vec;
-        while(!q.empty()){
-            pair<int,int> cur = q.top();
-            q.pop();
-            if(q.size()==0){
-                vec.push_back({cur.first,cur.second});
-            }else{
-                pair<int,int> nxt = q.top();
-                q.pop();
-                if(cur.first==nxt.first){
-                    q.push({cur.first,nxt.second});
-                }else{
-                    if(cur.second>=nxt.first){
-                        q.push({cur.first,max(cur.second,nxt.second)});
-                    }else{
-                        vec.push_back({cur.first,cur.second});
-                        q.push(nxt);
-                    }
-                }
+        sort(intervals.begin(),intervals.end());
+        vector<vector<int>> ans;
+        vector<int> cur = intervals[0];
+        int i = 1;
+        int n = intervals.size();
+        if(n==1) return intervals;
+        while(i<n){
+            while(i<n && cur[1]>=intervals[i][0]){
+                cur[1] = max(cur[1],intervals[i][1]);
+                i++;
+            }
+            ans.push_back(cur);
+            if(i<n){
+                cur = intervals[i];
             }
         }
-        return vec;
+        return ans;
     }
 };
