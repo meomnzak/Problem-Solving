@@ -1,34 +1,34 @@
 class Solution {
 public:
     bool backspaceCompare(string s, string t) {
-       int pointerOne = s.size()-1;
-       int pointerTwo = t.size()-1;
-       while(pointerOne>=0 || pointerTwo>=0){
-           int cntOne = 0;
-           while(pointerOne>=0 && (cntOne>0 || s[pointerOne]=='#')){
-                if(s[pointerOne]=='#'){
-                    cntOne++;
-                }else{
-                    cntOne--;
-                }
-               pointerOne--;
-           }
-           int cntTwo = 0;
-           while(pointerTwo>=0 && (cntTwo>0 || t[pointerTwo]=='#')){
-                if(t[pointerTwo]=='#'){
-                    cntTwo++;
-                }else{
-                    cntTwo--;
-                }
-               pointerTwo--;
-           }
-           if(pointerOne<0 && pointerTwo<0) break;
-           if(pointerOne<0 || pointerTwo<0) return false;
-           if(s[pointerOne]!=t[pointerTwo]) return false;
-           pointerOne--;
-           pointerTwo--;
-           
-       } 
-        return true;
+        stack<char> st1;
+        stack<char> st2;
+        string s1 = "";
+        string s2 = "";
+        for(int i = 0 ; i<s.size() ; i++){
+            if(s[i]=='#'){
+                if(st1.size()>0) st1.pop();
+            }else{
+                st1.push(s[i]);
+            }
+        }
+        while(st1.size()>0){
+            s1+=st1.top();
+            st1.pop();
+        }
+        reverse(s1.begin(),s1.end());
+        for(int i = 0 ; i<t.size() ; i++){
+            if(t[i]=='#'){
+                if(st2.size()>0) st2.pop();
+            }else{
+                st2.push(t[i]);
+            }
+        }
+        while(st2.size()>0){
+            s2+=st2.top();
+            st2.pop();
+        }
+        reverse(s2.begin(),s2.end());
+        return s1==s2;
     }
 };
