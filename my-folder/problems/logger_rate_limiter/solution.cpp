@@ -1,19 +1,21 @@
 class Logger {
 public:
     unordered_map<string,int> mp;
-    
     Logger() {
         mp.clear();
     }
     
     bool shouldPrintMessage(int timestamp, string message) {
+        if(mp.find(message)==mp.end()){
+            mp[message] = timestamp+10;
+            return true;
+        }
         if(timestamp>=mp[message]){
             mp[message] = timestamp+10;
             return true;
-        }else{
-            
-            return false;
         }
+        return false;
+        
     }
 };
 
