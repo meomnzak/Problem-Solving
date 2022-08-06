@@ -1,5 +1,5 @@
 # LeetCode-Solutions
-My accepted leetcode solutions to some of the common interview problems [PROFILE](https://leetcode.com/Moemn_Zakaria).
+My accepted leetcode solutions to some of the common interview problems. [Profile](https://leetcode.com/Moemn_Zakaria)
 # Algorithms
 * Array
 * String
