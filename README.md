@@ -1,4 +1,4 @@
-# LeetCode-Solutions
+# Problem Solving
 My accepted leetcode solutions to some of the common interview problems [Profile](https://leetcode.com/Moemn_Zakaria). And nearly 150 solutions out of the 800+ solved problems on codeforces [Profile](https://codeforces.com/profile/Moemn_Zakaria).
 # Algorithms
 * Array
